@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="TravelApp.Views.Templates.RecommendedItemTemplate">
+    <ContentView.Resources>
+        <ResourceDictionary>
+
+            <Style x:Key="RecommendedBorderStyle" TargetType="Frame">
+                <Setter Property="WidthRequest" Value="200" />
+                <Setter Property="CornerRadius" Value="24" />
+                <Setter Property="BackgroundColor" Value="White" />
+                <Setter Property="BorderColor" Value="White" />
+                <Setter Property="HasShadow" Value="False" />
+                <Setter Property="VerticalOptions" Value="FillAndExpand" />
+                <Setter Property="Padding" Value="0" />
+                <Setter Property="Margin" Value="0, 0, 20, 0" />
+            </Style>
+
+            <Style x:Key="RecommendedImageStyle" TargetType="Image">
+                <Setter Property="Aspect" Value="AspectFill" />
+            </Style>
+
+            <Color x:Key="PriceColor">#67ACE9</Color>
+            
+            <Style x:Key="PriceBorderStyle" TargetType="Frame">
+                <Setter Property="BackgroundColor" Value="{StaticResource PriceColor}" />
+                <Setter Property="HeightRequest" Value="24" />
+                <Setter Property="CornerRadius" Value="12" />
+                <Setter Property="HasShadow" Value="False" />
+                <Setter Property="HorizontalOptions" Value="End" />
+                <Setter Property="VerticalOptions" Value="Start" />
+                <Setter Property="Padding" Value="6" />
+                <Setter Property="Margin" Value="12" />
+            </Style>
+         
+            <Style x:Key="PriceTextStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="Rockolf" />
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="Margin" Value="6, 0" />
+            </Style>
+            
+            <Style x:Key="InfoContainerStyle" TargetType="Grid">
+                <Setter Property="Margin" Value="12, 0, 0, 24" />
+                <Setter Property="VerticalOptions" Value="End" />
+            </Style>
+
+            <Style x:Key="NameTextStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="Rockolf Bold" />
+                <Setter Property="FontSize" Value="20" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="TextColor" Value="White" />
+            </Style>
+
+            <Style x:Key="PlaceTextStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="Rockolf" />
+                <Setter Property="FontSize" Value="12" />
+                <Setter Property="TextColor" Value="White" />
+            </Style>
+
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <ContentView.Content>
+        <Grid>
+            <Frame 
+                Style="{StaticResource RecommendedBorderStyle}">
+                <Grid>
+                    <Image 
+                        Source="{Binding Image}"
+                        Style="{StaticResource RecommendedImageStyle}"/>
+                    <Frame
+                        Style="{StaticResource PriceBorderStyle}">
+                        <Label
+                            Text="{Binding Price, StringFormat='$ {0:F0}'}"
+                            Style="{StaticResource PriceTextStyle}"/>
+                    </Frame>
+                    <Grid
+                        RowDefinitions="Auto, Auto"
+                        Style="{StaticResource InfoContainerStyle}">
+                        <Label 
+                            Text="{Binding Name}"
+                            Style="{StaticResource NameTextStyle}"/>
+                        <Label 
+                            Grid.Row="1"
+                            Text="{Binding Place}"
+                            Style="{StaticResource PlaceTextStyle}"/>
+                    </Grid>
+                </Grid>
+            </Frame>
+        </Grid>
+    </ContentView.Content>
+</ContentView>

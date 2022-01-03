@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="TravelApp.Views.Templates.TopItemTemplate">
+    <ContentView.Resources>
+        <ResourceDictionary>
+
+            <Style x:Key="TopBorderStyle" TargetType="Frame">
+                <Setter Property="BackgroundColor" Value="White" />
+                <Setter Property="BorderColor" Value="White" />
+                <Setter Property="CornerRadius" Value="12" />
+                <Setter Property="HasShadow" Value="False" />
+                <Setter Property="Padding" Value="6" />
+                <Setter Property="Margin" Value="0, 0, 40, 0" />
+            </Style>
+
+            <Style x:Key="TopInfoContainerStyle" TargetType="Grid">
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="Margin" Value="10, 0" />
+            </Style>
+            
+            <Style x:Key="TopImageStyle" TargetType="Image">
+                <Setter Property="Aspect" Value="AspectFill" />
+            </Style>
+
+            <Style x:Key="PlaceTextStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="Rockolf Bold" />
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="TextColor" Value="Black" />
+            </Style>
+
+            <Style x:Key="NameTextStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="Rockolf" />
+            </Style>
+
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <ContentView.Content>
+        <Grid>
+            <Frame
+                Style="{StaticResource TopBorderStyle}">
+                <Grid
+                    ColumnDefinitions="60, *">
+                    <Image
+                        Source="{Binding Image}"   
+                        Style="{StaticResource TopImageStyle}">
+                        <Image.Clip>
+                            <RoundRectangleGeometry
+                                Rect="1 ,1, 60, 60"
+                                CornerRadius="12"/>
+                        </Image.Clip>
+                    </Image>
+                    <Grid 
+                        Grid.Column="1"
+                        RowDefinitions="Auto, Auto"
+                        Style="{StaticResource TopInfoContainerStyle}">
+                        <Label
+                            Text="{Binding Place}"
+                            Style="{StaticResource PlaceTextStyle}"/>
+                        <Label
+                            Grid.Row="1"
+                            Text="{Binding Name}"
+                            Style="{StaticResource NameTextStyle}"/>
+                    </Grid>
+                </Grid>
+            </Frame>
+        </Grid>
+    </ContentView.Content>
+</ContentView>
