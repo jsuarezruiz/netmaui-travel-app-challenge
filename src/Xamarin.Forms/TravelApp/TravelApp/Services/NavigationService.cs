@@ -36,12 +36,12 @@ namespace TravelApp.Services
             get { return Application.Current; }
         }
 
-        public Task NavigateToAsync<TViewModel>() where TViewModel : BindableObject
+        public Task NavigateToAsync<TViewModel>() where TViewModel : ViewModelBase
         {
             return InternalNavigateToAsync(typeof(TViewModel), null);
         }
 
-        public Task NavigateToAsync<TViewModel>(object parameter) where TViewModel : BindableObject
+        public Task NavigateToAsync<TViewModel>(object parameter) where TViewModel : ViewModelBase
         {
             return InternalNavigateToAsync(typeof(TViewModel), parameter);
         }
@@ -54,6 +54,11 @@ namespace TravelApp.Services
         public Task NavigateToAsync(Type viewModelType, object parameter)
         {
             return InternalNavigateToAsync(viewModelType, parameter);
+        }
+
+        public async Task NavigateBackAsync()
+        {
+            await CurrentApplication.MainPage.Navigation.PopAsync();
         }
 
         protected Type GetPageTypeForViewModel(Type viewModelType)
@@ -95,13 +100,14 @@ namespace TravelApp.Services
                     await navigationPage.PushAsync(page);
                 }
             }
+
+            await (page.BindingContext as ViewModelBase).InitializeAsync(parameter);
         }
 
-            void CreatePageViewModelMappings()
-            {
-                _mappings.Add(typeof(MainViewModel), typeof(HomeView));
-                _mappings.Add(typeof(DetailViewModel), typeof(DetailView));
-            }
+        void CreatePageViewModelMappings()
+        {
+            _mappings.Add(typeof(MainViewModel), typeof(HomeView));
+            _mappings.Add(typeof(DetailViewModel), typeof(DetailView));
         }
-    
+    }
 }

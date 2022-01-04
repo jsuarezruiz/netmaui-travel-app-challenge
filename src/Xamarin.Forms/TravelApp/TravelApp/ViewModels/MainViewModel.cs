@@ -1,11 +1,13 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.Windows.Input;
 using TravelApp.Models;
 using TravelApp.Services;
 using Xamarin.Forms;
 
 namespace TravelApp.ViewModels
 {
-    public class MainViewModel : BindableObject
+    public class MainViewModel : ViewModelBase
     {
         ObservableCollection<Destination> _recommendedDestinations;
         ObservableCollection<Destination> _topDestinations;
@@ -35,10 +37,17 @@ namespace TravelApp.ViewModels
             }
         }
 
+        public ICommand DetailCommand => new Command<Destination>(OnNavigate);
+
         void LoadData()
         {
             RecommendedDestinations = new ObservableCollection<Destination>(DestinationService.Instance.RecommendedDestinations);
             TopDestinations = new ObservableCollection<Destination>(DestinationService.Instance.TopDestinations);
+        }
+
+        void OnNavigate(Destination parameter)
+        {
+            NavigationService.Instance.NavigateToAsync<DetailViewModel>(parameter);
         }
     }
 }

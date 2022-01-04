@@ -3,12 +3,249 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="TravelApp.Views.DetailView"
+    xmlns:templates="clr-namespace:TravelApp.Views.Templates"
     xmlns:viewmodel="clr-namespace:TravelApp.ViewModels">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+
+            <Style x:Key="InfoContainerStyle" TargetType="Frame">
+                <Setter Property="HeightRequest" Value="350" />
+                <Setter Property="CornerRadius" Value="24" />
+                <Setter Property="HasShadow" Value="False" />
+                <Setter Property="Padding" Value="0" />
+                <Setter Property="BackgroundColor" Value="{StaticResource AccentColor}" />
+            </Style>
+
+            <Color x:Key="NavigationButtonColor">#CC81BBEC</Color>
+            
+            <Style x:Key="NavigationContainerStyle" TargetType="Frame">
+                <Setter Property="HeightRequest" Value="44" />
+                <Setter Property="WidthRequest" Value="44" />
+                <Setter Property="CornerRadius" Value="18" />
+                <Setter Property="HasShadow" Value="False" />
+                <Setter Property="Padding" Value="1" />
+                <Setter Property="BackgroundColor" Value="{StaticResource NavigationButtonColor}" />
+                <Setter Property="HorizontalOptions" Value="Start" />
+                <Setter Property="VerticalOptions" Value="Start" />
+                <Setter Property="Margin" Value="18, 24" />
+            </Style>
+
+            <Style x:Key="NavigationImageStyle" TargetType="Image">
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="Margin" Value="6" />
+            </Style>
+                       
+            <Style x:Key="InfoTextContainerStyle" TargetType="Grid">
+                <Setter Property="VerticalOptions" Value="End" />
+                <Setter Property="Margin" Value="18, 0, 0, 36" />
+            </Style>
+
+            <Style x:Key="NameTextStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="FontFamily" Value="Rockolf Bold" />
+                <Setter Property="FontSize" Value="24" />
+                <Setter Property="FontAttributes" Value="Bold" />
+            </Style>
+
+            <Color x:Key="RatingColor">#CCAF95A3</Color>
+            
+            <Style x:Key="RatingContainerStyle" TargetType="Frame">
+                <Setter Property="BackgroundColor" Value="{StaticResource RatingColor}" />
+                <Setter Property="CornerRadius" Value="12" />
+                <Setter Property="HasShadow" Value="False" />
+                <Setter Property="Padding" Value="6" />
+                <Setter Property="HorizontalOptions" Value="End" />
+                <Setter Property="Margin" Value="12, 0" />
+            </Style>
+
+            <Style x:Key="SectionTextStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="Black" />
+                <Setter Property="FontFamily" Value="Rockolf Bold" />
+                <Setter Property="FontSize" Value="18" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="Margin" Value="0, 12" />
+            </Style>
+
+            <Color x:Key="StarColor">#FFC107</Color>
+
+            <Style x:Key="PriceTextStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="FontFamily" Value="Rockolf Bold" />
+                <Setter Property="FontSize" Value="18" />
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
+            
+            <Style x:Key="PricePersonTextStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="FontFamily" Value="Rockolf" />
+                <Setter Property="FontSize" Value="12" />
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
+
+            <Style x:Key="RatingTextStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="FontFamily" Value="Rockolf Bold" />
+                <Setter Property="FontSize" Value="18" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="Margin" Value="6, 0" />
+            </Style>
+
+            <Style x:Key="AboutTextStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="Rockolf" />
+            </Style>
+
+            <Style x:Key="BookButtonStyle" TargetType="Frame">
+                <Setter Property="HeightRequest" Value="36" />
+                <Setter Property="CornerRadius" Value="18" />
+                <Setter Property="HasShadow" Value="True" />
+                <Setter Property="BackgroundColor" Value="{StaticResource AccentColor}" />
+                <Setter Property="Margin" Value="0, 12, 0, 0" />
+            </Style>
+
+            <Style x:Key="BookTextStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="FontFamily" Value="Rockolf Bold" />
+                <Setter Property="FontSize" Value="18" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.BindingContext>
         <viewmodel:DetailViewModel />
     </ContentPage.BindingContext>
     <ContentPage.Content>
-        <StackLayout>
-        </StackLayout>
+        <ScrollView>
+            <StackLayout
+                Padding="30">
+                <!-- INFO -->
+                <Frame
+                    Style="{StaticResource InfoContainerStyle}">
+                    <Grid>
+                        <Image 
+                            Aspect="AspectFill"
+                            Source="{Binding Destination.Image}" />
+                        <!-- BACK -->
+                        <Frame
+                            Style="{StaticResource NavigationContainerStyle}">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:DetailViewModel}}, Path=BackCommand}" />
+                            </Frame.GestureRecognizers>
+                            <Image
+                                Style="{StaticResource NavigationImageStyle}"
+                                Margin="12, 6, 6, 6">
+                                <Image.Source>
+                                    <FontImageSource
+                                        FontFamily="Material"
+                                        Glyph="&#xe5e0;"
+                                        Size="18"
+                                        Color="White" />
+                                </Image.Source>
+                            </Image>
+                        </Frame>
+                        <!-- SHARE -->
+                        <Frame
+                            HorizontalOptions="End"
+                            Style="{StaticResource NavigationContainerStyle}">
+                            <Image
+                                Style="{StaticResource NavigationImageStyle}">
+                                <Image.Source>
+                                    <FontImageSource
+                                        FontFamily="Material"
+                                        Glyph="&#xe80d;"
+                                        Size="18"
+                                        Color="White" />
+                                </Image.Source>
+                            </Image>
+                        </Frame>
+                        <Grid
+                            ColumnDefinitions="Auto, Auto"
+                            RowDefinitions="Auto, Auto"      
+                            Style="{StaticResource InfoTextContainerStyle}">
+                            <!-- NAME -->
+                            <Label
+                                Text="{Binding Destination.Name}"
+                                Style="{StaticResource NameTextStyle}"/>
+                            <!-- PRICE -->
+                            <Grid
+                                Grid.Row="1"
+                                ColumnDefinitions="Auto, Auto">
+                                <Label
+                                    Text="{Binding Destination.Price, StringFormat='$ {0:F0}'}"
+                                    Style="{StaticResource PriceTextStyle}"/>
+                                <Label
+                                    Grid.Column="1"
+                                    Text="/ person"
+                                    Style="{StaticResource PricePersonTextStyle}"/>
+                            </Grid>
+                            <!-- RATING -->
+                            <Frame
+                                Grid.Column="2"
+                                Grid.Row="1"
+                                Style="{StaticResource RatingContainerStyle}">
+                                <Grid
+                                    ColumnDefinitions="Auto, Auto">
+                                    <Image>
+                                        <Image.Source>
+                                            <FontImageSource
+                                                FontFamily="Material"
+                                                Glyph="&#xe838;"
+                                                Size="22"
+                                                Color="{StaticResource StarColor}" />
+                                        </Image.Source>
+                                    </Image>
+                                    <Label
+                                        Grid.Column="1"
+                                        Text="4.9"
+                                        Style="{StaticResource RatingTextStyle}"/>
+                                </Grid>
+                            </Frame>
+                        </Grid>
+                    </Grid>
+                </Frame>
+                <!-- ABOUT -->
+                <Grid
+                    RowDefinitions="Auto, *">
+                    <Label
+                        Text="About"
+                        Style="{StaticResource SectionTextStyle}"/>
+                    <Label 
+                        Grid.Row="1"
+                        Text="{Binding Destination.About}"
+                        Style="{StaticResource AboutTextStyle}"/>
+                </Grid>
+                <!-- GALLERY -->
+                <Grid
+                    RowDefinitions="Auto, *">
+                    <Label
+                        Text="Gallery"
+                        Style="{StaticResource SectionTextStyle}"/>
+                    <StackLayout
+                        Grid.Row="1"
+                        Orientation="Horizontal"
+                        BindableLayout.ItemsSource="{Binding Destination.Gallery}">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <templates:GalleryItemTemplate />
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </StackLayout>
+                </Grid>
+                <!-- BOOK -->
+                <Frame
+                    Style="{StaticResource BookButtonStyle}">
+                    <Grid
+                        ColumnDefinitions="*, Auto">
+                        <Label 
+                            Grid.ColumnSpan="2"
+                            Text="Book now"
+                            Style="{StaticResource BookTextStyle}"/>
+                    </Grid>
+                </Frame>
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>
