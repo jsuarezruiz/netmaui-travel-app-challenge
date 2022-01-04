@@ -1,5 +1,7 @@
 # Travel App - .NET MAUI UI Challenge
 
+_(Work in progress)_
+
 Travel App UI Challenge made with .NET MAUI (and Xamarin.Forms).
 
 ![TravelApp](images/travelapp-maui.png)
