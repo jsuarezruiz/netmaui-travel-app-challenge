@@ -2,21 +2,34 @@
 <ContentView 
     xmlns="http://xamarin.com/schemas/2014/forms" 
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Class="TravelApp.Views.Templates.GalleryItemTemplate">
+    x:Class="TravelApp.Views.Templates.GalleryItemTemplate"
+    xmlns:converters="clr-namespace:TravelApp.Converters">
     <ContentView.Resources>
         <ResourceDictionary>
+
+            <converters:PlusIsVisibleConverter x:Key="PlusIsVisibleConverter" />
             
             <Style x:Key="GalleryContainerStyle" TargetType="Frame">
-                <Setter Property="HeightRequest" Value="72" />
-                <Setter Property="WidthRequest" Value="72" />
+                <Setter Property="HeightRequest" Value="68" />
+                <Setter Property="WidthRequest" Value="68" />
                 <Setter Property="CornerRadius" Value="18" />
                 <Setter Property="HasShadow" Value="False" />
                 <Setter Property="Padding" Value="0" />
                 <Setter Property="Margin" Value="0, 0, 12, 0" />
             </Style>
-            
+
             <Style x:Key="GalleryImageStyle" TargetType="Image">
                 <Setter Property="Aspect" Value="AspectFill" />
+            </Style>
+
+            <Color x:Key="PlusColor">#88000000</Color>
+            
+            <Style x:Key="InfoTextStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="FontFamily" Value="Rockolf Bold" />
+                <Setter Property="FontSize" Value="18" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="VerticalOptions" Value="Center" />
             </Style>
             
         </ResourceDictionary>
@@ -24,9 +37,18 @@
     <ContentView.Content>
         <Frame
             Style="{StaticResource GalleryContainerStyle}">
-            <Image
-                Source="{Binding}"
-                Style="{StaticResource GalleryImageStyle}"/>
+            <Grid>
+                <Image
+                    Source="{Binding Image}"
+                    Style="{StaticResource GalleryImageStyle}"/>
+                <Grid
+                    BackgroundColor="{StaticResource PlusColor}"
+                    IsVisible="{Binding Id, Converter={StaticResource PlusIsVisibleConverter}}">
+                    <Label  
+                        Text="+6"
+                        Style="{StaticResource InfoTextStyle}"/>
+                </Grid>
+            </Grid>
         </Frame>
     </ContentView.Content>
 </ContentView>

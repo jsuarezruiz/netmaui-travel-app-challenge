@@ -18,16 +18,16 @@ namespace TravelApp.Services
             }
         }
 
-        internal List<string> Gallery
+        internal List<GalleryItem> Gallery
         {
             get
             {
-                return new List<string>
+                return new List<GalleryItem>
                 {
-                    "destination1.jpg",
-                    "destination2.jpg",
-                    "destination3.jpg",
-                    "destination4.jpg"
+                    new GalleryItem { Id = 1, Image = "destination1.jpg" },
+                    new GalleryItem { Id = 2, Image = "destination2.jpg" },
+                    new GalleryItem { Id = 3, Image = "destination3.jpg" },
+                    new GalleryItem { Id = 4, Image = "destination4.jpg" }
                 };
             }
         }
