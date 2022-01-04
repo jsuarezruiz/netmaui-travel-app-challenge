@@ -1,0 +1,224 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="TravelApp.Views.HomeView"     
+    xmlns:controls="clr-namespace:TravelApp.Controls"
+    xmlns:viewmodel="clr-namespace:TravelApp.ViewModels"
+    xmlns:templates="clr-namespace:TravelApp.Views.Templates"
+    BarBackgroundColor="White">
+    <TabbedPage.Resources>
+        <ResourceDictionary>
+
+            <Style x:Key="WelcomeContainerStyle" TargetType="Grid">
+                <Setter Property="Margin" Value="10, 0, 0, 0" />
+            </Style>
+
+            <Style x:Key="WelcomeTitleStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="Rockolf" />
+                <Setter Property="TextColor" Value="Gray" />
+                <Setter Property="FontSize" Value="14" />
+            </Style>
+
+            <Style x:Key="WelcomeSubtitleStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="Rockolf Bold" />
+                <Setter Property="TextColor" Value="Black" />
+                <Setter Property="FontSize" Value="18" />
+            </Style>
+
+            <Style x:Key="SectionText1Style" TargetType="Label">
+                <Setter Property="TextColor" Value="Black" />
+                <Setter Property="FontFamily" Value="Rockolf Bold" />
+                <Setter Property="FontSize" Value="20" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="Margin" Value="0, 12" />
+            </Style>
+
+            <Style x:Key="SectionText2Style" TargetType="Label" BasedOn="{StaticResource SectionText1Style}">
+                <Setter Property="FontSize" Value="16" />
+            </Style>
+
+            <Style x:Key="SectionDotsStyle" TargetType="Label" BasedOn="{StaticResource SectionText1Style}">
+                <Setter Property="TextColor" Value="Gray" />
+                <Setter Property="FontSize" Value="20" />
+                <Setter Property="CharacterSpacing" Value="2" />
+                <Setter Property="HorizontalOptions" Value="End" />
+            </Style>
+
+            <Style x:Key="FilterContainerStyle" TargetType="Grid">
+                <Setter Property="HeightRequest" Value="54" />
+                <Setter Property="Margin" Value="0, 10" />
+            </Style>
+
+            <Style x:Key="SearchBarContainerStyle" TargetType="Frame">
+                <Setter Property="BackgroundColor" Value="White" />
+                <Setter Property="HasShadow" Value="False" />
+                <Setter Property="CornerRadius" Value="12" />
+                <Setter Property="Padding" Value="6" />
+                <Setter Property="Margin" Value="0, 0, 10, 0" />
+            </Style>
+
+            <Style x:Key="SearchBarStyle" TargetType="controls:BorderlessSearchBar">
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="FontFamily" Value="Rockolf" />
+                <Setter Property="BackgroundColor" Value="Transparent" />
+            </Style>
+
+            <Style x:Key="FilterButtonStyle" TargetType="Frame">
+                <Setter Property="BackgroundColor" Value="{StaticResource AccentColor}" />
+                <Setter Property="CornerRadius" Value="18" />
+                <Setter Property="HasShadow" Value="False" />
+            </Style>
+
+        </ResourceDictionary>
+    </TabbedPage.Resources>
+    <!-- HOME TAB -->
+    <ContentPage
+        IconImageSource="home.png">
+        <ContentPage.BindingContext>
+            <viewmodel:MainViewModel />
+        </ContentPage.BindingContext>
+        <ContentPage.Content>
+            <ScrollView>
+                <Grid
+                    Padding="30"
+                    RowDefinitions="Auto, Auto, 320, 130">
+                    <!-- PROFILE -->
+                    <Grid
+                        Grid.Row="0"
+                        ColumnDefinitions="Auto, *, Auto">
+                        <Image 
+                            Source="profile.png">
+                            <Image.Clip>
+                                <EllipseGeometry 
+                                Center="30, 30"
+                                RadiusX="30"
+                                RadiusY="30" />
+                            </Image.Clip>
+                        </Image>
+                        <Grid
+                            Grid.Column="1"
+                            RowSpacing="0"
+                            RowDefinitions="Auto, Auto"
+                            Style="{StaticResource WelcomeContainerStyle}">
+                            <Label 
+                                Text="Welcome"
+                                Style="{StaticResource WelcomeTitleStyle}"/>
+                            <Label 
+                                Grid.Row="1"
+                                Text="Arya Wijaya"
+                                Style="{StaticResource WelcomeSubtitleStyle}"/>
+                        </Grid>
+                        <Grid
+                            Grid.Column="2">
+                            <Image>
+                                <Image.Source>
+                                    <FontImageSource
+                                        FontFamily="Material"
+                                        Glyph="&#xe7f4;"
+                                        Size="30"
+                                        Color="#B5BDCA" />
+                                </Image.Source>
+                            </Image>
+                        </Grid>
+                    </Grid>
+                    <!-- SEARCHBAR -->
+                    <Grid
+                        Grid.Row="1"
+                        ColumnDefinitions="*, Auto"
+                        Style="{StaticResource FilterContainerStyle}">
+                        <Frame
+                            Style="{StaticResource SearchBarContainerStyle}">
+                            <controls:BorderlessSearchBar
+                                Placeholder="Search Destination"
+                                Style="{StaticResource SearchBarStyle}"/>
+                        </Frame>
+                        <Frame
+                            Grid.Column="1"
+                            Style="{StaticResource FilterButtonStyle}">
+                            <Image>
+                                <Image.Source>
+                                    <FontImageSource
+                                        FontFamily="Material"
+                                        Glyph="&#xe8c1;"
+                                        Size="18"
+                                        Color="White" />
+                                </Image.Source>
+                            </Image>
+                        </Frame>
+                    </Grid>
+                    <!-- RECOMMENDED DESTINATIONS -->
+                    <Grid
+                        Grid.Row="2"
+                        RowDefinitions="Auto, *">
+                        <Grid
+                            ColumnDefinitions="*, Auto">
+                            <Label 
+                                Text="Recommended"
+                                Style="{StaticResource SectionText1Style}"/>
+                            <Label 
+                                Grid.Column="1"
+                                Text="..."
+                                Style="{StaticResource SectionDotsStyle}"/>
+                        </Grid>
+                        <CollectionView
+                            Grid.Row="1"
+                            ItemsSource="{Binding RecommendedDestinations}">
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout
+                                    Orientation="Horizontal"/>
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <templates:RecommendedItemTemplate />
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </Grid>
+                    <!-- TOP DESTINATIONS -->
+                    <Grid
+                        Grid.Row="3"
+                        RowDefinitions="Auto, *">
+                        <Grid>
+                            <Label 
+                                Text="Top Destination"
+                                Style="{StaticResource SectionText2Style}"/>
+                            <Label 
+                                Grid.Column="1"
+                                Text="..."
+                                Style="{StaticResource SectionDotsStyle}"/>
+                        </Grid>
+                        <CollectionView
+                            Grid.Row="1"
+                            ItemsSource="{Binding TopDestinations}">
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout
+                                    Orientation="Horizontal"/>
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <templates:TopItemTemplate />
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </Grid>
+                </Grid>
+            </ScrollView>
+        </ContentPage.Content>
+    </ContentPage>
+    <!-- MAP TAB -->
+    <ContentPage 
+        IconImageSource="compass.png">
+        <Grid />
+    </ContentPage>
+    <!-- BOOKMARKS TAB -->
+    <ContentPage
+        IconImageSource="bookmarks.png">
+        <Grid />
+    </ContentPage>
+    <!-- PROFILE TAB -->
+    <ContentPage
+        IconImageSource="profile2.png">
+        <Grid />
+    </ContentPage>
+    </TabbedPage>
