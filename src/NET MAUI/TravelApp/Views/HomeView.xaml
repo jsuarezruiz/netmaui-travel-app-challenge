@@ -155,6 +155,7 @@
                             ColumnDefinitions="*, Auto">
                             <Label 
                                 Text="Recommended"
+                                SemanticProperties.Description="List of recommended destinations"
                                 Style="{StaticResource SectionText1Style}"/>
                             <Label 
                                 Grid.Column="1"
@@ -182,6 +183,7 @@
                         <Grid>
                             <Label 
                                 Text="Top Destination"
+                                SemanticProperties.Description="List of top destinations"
                                 Style="{StaticResource SectionText2Style}"/>
                             <Label 
                                 Grid.Column="1"

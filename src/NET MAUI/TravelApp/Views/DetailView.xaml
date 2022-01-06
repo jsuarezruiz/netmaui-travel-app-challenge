@@ -168,6 +168,7 @@
                             <!-- NAME -->
                             <Label
                                 Text="{Binding Destination.Name}"
+                                SemanticProperties.Description="Name of the destination"
                                 Style="{StaticResource NameTextStyle}"/>
                             <!-- PRICE -->
                             <Grid
@@ -175,6 +176,7 @@
                                 ColumnDefinitions="Auto, Auto">
                                 <Label
                                     Text="{Binding Destination.Price, StringFormat='$ {0:F0}'}"
+                                    SemanticProperties.Description="The price of the selected destination"
                                     Style="{StaticResource PriceTextStyle}"/>
                                 <Label
                                     Grid.Column="1"
@@ -215,6 +217,7 @@
                     <Label 
                         Grid.Row="1"
                         Text="{Binding Destination.About}"
+                        SemanticProperties.Description="Detailed description of the selected destination"
                         Style="{StaticResource AboutTextStyle}"/>
                 </Grid>
                 <!-- GALLERY -->
@@ -242,6 +245,7 @@
                         <Label 
                             Grid.ColumnSpan="2"
                             Text="Book now"
+                            SemanticProperties.Hint="Book a trip to the selected destination"
                             Style="{StaticResource BookTextStyle}"/>
                     </Grid>
                 </Frame>
