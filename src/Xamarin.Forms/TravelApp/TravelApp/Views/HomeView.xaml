@@ -1,4 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--
+    In Xamarin.Forms we could achieve exactly the desired tabs appearance using the Community Toolkit's TabView or Sharpnado.Tabs. 
+    However, since at the time of creating this sample the mentioned libraries are not yet ready for .NET MAUI, a 
+    TabbedPage is used.
+-->
 <TabbedPage 
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
